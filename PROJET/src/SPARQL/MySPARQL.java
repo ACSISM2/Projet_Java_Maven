@@ -20,7 +20,7 @@ public static void sparqlTest(){
 	//Model model = FileManager.get().loadModel(my.model);
 	
 	
-	// Requêtte pour Prefix de fichier RDF 
+	// Requï¿½tte pour Prefix de fichier RDF 
 	
 	String queryStringPrefix=
 	"PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> " +
@@ -31,36 +31,36 @@ public static void sparqlTest(){
 	"PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> "+
 	"PREFIX arnold: <http://Arnold#> ";
 	
-	// ### nom du réalisateur du film Twins
+	// ### nom du rï¿½alisateur du film Twins
 	
 	
 	String queryString1= queryStringPrefix+
 	"SELECT DISTINCT ?realisateur WHERE {movie:Movies ?x ?y.?y movie:title \"Twins\".?y movie:directedBy ?realisateur}";
 	
-	// ### Liste des titres, réalisateurs et dates de sortie des films ordonnées par la date de sortie.
+	// ### Liste des titres, rï¿½alisateurs et dates de sortie des films ordonnï¿½es par la date de sortie.
 	
 	String queryString2=queryStringPrefix+
 	"SELECT ?movieTitle ?director ?dateRelease "+
 	"WHERE {?movie movie:directedBy ?director ; movie:title ?movieTitle ; "+
 	"movie:releaseDate ?dateRelease } ORDER BY ASC(?dateRelease)";
-// Requêtte 1:
+// Requï¿½tte 1:
 	
 Query query1= QueryFactory.create(queryString1);
 
-//Requêtte 2:
+//Requï¿½tte 2:
 
 Query query2= QueryFactory.create(queryString2);
 
-// Execution Requêtte 1 :
+// Execution Requï¿½tte 1 :
 
 QueryExecution qexec1 = QueryExecutionFactory.create(query1,my.model);
 
-//Execution Requêtte 2 :
+//Execution Requï¿½tte 2 :
 
 QueryExecution qexec2 = QueryExecutionFactory.create(query2,my.model);
 
 try{
-	// Resultats du requêtte 1 :
+	// Resultats du requï¿½tte 1 :
 	
 	ResultSet results1= qexec1.execSelect();
 	System.out.println("R = " +results1.getResultVars());
@@ -71,16 +71,16 @@ try{
 		
 	}
 	
-	// Resultats du requêtte 2 :
+	// Resultats du requï¿½tte 2 :
 	
 	ResultSet results2= qexec2.execSelect();
 	System.out.println("R = " +results2.getResultVars());
 	while(results2.hasNext()){
 		QuerySolution soln = results2.nextSolution();
 		Literal Titre= soln.getLiteral("?movieTitle");
-		Literal Réalisateur= soln.getLiteral("?director");
+		Literal Realisateur= soln.getLiteral("?director");
 		Literal Date= soln.getLiteral("?dateRelease");
-		System.out.println("Titre : "+Titre+ "|| Réaliser par : "+ Réalisateur+ " || Date : "+Date);
+		System.out.println("Titre : "+Titre+ "|| Rï¿½aliser par : "+ Realisateur+ " || Date : "+Date);
 	}
 }
 finally {
