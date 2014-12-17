@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+         xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns:foaf="http://xmlns.com/foaf/0.1/"
+		 xmlns:local="http://Vocab#"
+         xmlns:movie="http://movie#"
+         xmlns:arnold="http://Arnold#">
+   
+   <rdf:Description rdf:about="http://Arnold#">
+      <arnold:isA>
+         <rdf:Bag rdf:about="http://Vocab#Professions">
+		 <rdf:type rdf:resource="http://Vocab#Job"/>
+            <rdf:li>Actor</rdf:li>
+            <rdf:li>Producer</rdf:li>
+            <rdf:li>Director</rdf:li>
+         </rdf:Bag>
+      </arnold:isA>
+   </rdf:Description>
+   <rdf:Bag rdf:about="http://movie#Movies">
+            <rdf:type rdf:resource="http://movie#Movie"/>
+            <rdf:li rdf:resource="http://movie#filmId_1"/>
+            <rdf:li rdf:resource="http://movie#filmId_2"/>
+            <rdf:li rdf:resource="http://movie#filmId_3"/>
+         </rdf:Bag>
+   <rdf:Description rdf:about="http://movie#filmId_1">
+      <movie:title>Terminator 2 Judgment Day</movie:title>
+      <movie:directedBy>James Cameron</movie:directedBy>
+      <movie:releaseDate>1991-07-03</movie:releaseDate>
+      <movie:productionCompany>Paramount Pictures</movie:productionCompany>
+   </rdf:Description>
+   <rdf:Description rdf:about="http://movie#filmId_2">
+      <movie:title>Twins</movie:title>
+      <movie:directedBy>Ivan Reitman</movie:directedBy>
+      <movie:releaseDate>1988-09-09</movie:releaseDate>
+      <movie:productionCompany>Gold Stallone Films</movie:productionCompany>
+   </rdf:Description>
+   <rdf:Description rdf:about="http://movie#filmId_3">
+      <movie:title>The Expendables 3</movie:title>
+      <movie:directedBy>Patrick Ivan</movie:directedBy>
+      <movie:releaseDate>2014-08-15</movie:releaseDate>
+      <movie:productionCompany>Nu Image / Millennium Films</movie:productionCompany>
+   </rdf:Description>
+   <rdf:Description rdf:about="http://movie#filmId_1">
+   <rdf:type rdf:resource="http://movie#Movie"/>
+      <movie:movieActor>
+         <rdf:Bag rdf:about="http://Vocab#actors_1">
+		 <rdf:type rdf:resource="http://Vocab#Person"/>
+            <rdf:li>Edward Furlong</rdf:li>
+            <rdf:li>Robert Patrick</rdf:li>
+         </rdf:Bag>
+      </movie:movieActor>
+   </rdf:Description>
+   <rdf:Description rdf:about="http://movie#filmId_2">
+    <rdf:type rdf:resource="http://movie#Movie"/>
+      <movie:movieActor>
+         <rdf:Bag rdf:about="http://Vocab#actors_2">
+		 <rdf:type rdf:resource="http://Vocab#Person"/>
+            <rdf:li>Abigail Breslin</rdf:li>
+         </rdf:Bag>
+      </movie:movieActor>
+   </rdf:Description>
+   <rdf:Description rdf:about="http://movie#filmId_3">
+   <rdf:type rdf:resource="http://movie#Movie"/>
+      <movie:movieActor>
+         <rdf:Bag rdf:about="http://Vocab#actors_3">
+		 <rdf:type rdf:resource="http://Vocab#Person"/>
+            <rdf:li>Sylvester Stallone</rdf:li>
+            <rdf:li>Jason Statham</rdf:li>
+            <rdf:li>Jet Li</rdf:li>
+         </rdf:Bag>
+      </movie:movieActor>
+   </rdf:Description>   
+   <rdf:Description rdf:about="http://movie#filmId_1">
+   <rdf:type rdf:resource="http://movie#Movie"/>
+      <movie:movieWriter>
+         <rdf:Bag rdf:about="http://Vocab#writers_1">
+		 <rdf:type rdf:resource="http://Vocab#Person"/>
+            <rdf:li>James Cameron</rdf:li>
+            <rdf:li>William Wisher Jr.</rdf:li>
+         </rdf:Bag>
+      </movie:movieWriter>
+   </rdf:Description>
+   <rdf:Description rdf:about="http://movie#filmId_2">
+   <rdf:type rdf:resource="http://movie#Movie"/>
+      <movie:movieWriter>
+         <rdf:Bag rdf:about="http://Vocab#writers_2">
+		 <rdf:type rdf:resource="http://Vocab#Person"/>
+            <rdf:li>Ivan Reitman</rdf:li>
+         </rdf:Bag>
+      </movie:movieWriter>
+   </rdf:Description>
+   <rdf:Description rdf:about="http://movie#filmId_3">
+   <rdf:type rdf:resource="http://movie#Movie"/>
+      <movie:movieWriter>
+         <rdf:Bag rdf:about="http://Vocab#writers_3">
+		 <rdf:type rdf:resource="http://Vocab#Person"/>
+            <rdf:li>Sylvester Stallone</rdf:li>
+            <rdf:li>Creighton Rothenberger</rdf:li>
+         </rdf:Bag>
+      </movie:movieWriter>
+   </rdf:Description>
+   <rdfs:Class rdf:about="http://Vocab#Person"/>
+   <rdfs:Class rdf:about="http://Vocab#Job"/>
+   
+</rdf:RDF>

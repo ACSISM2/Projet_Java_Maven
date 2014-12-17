@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+    <rdf:Description rdf:about="http://Cinema">
+    <rdfs:label rdf:resource="http://NINJA"/>
+    <rdfs:label rdf:resource="http://jet_lee"/>
+    <rdfs:label rdf:resource="http://bruce_lee"/>
+    <rdfs:label rdf:resource="http://jacki_chan"/>
+    <rdfs:label rdf:resource="http://bruce_awa_lee"/>
+    
+    </rdf:Description>
+  <rdf:Description rdf:about="http://NINJA">
+   
+    <rdfs:label>Films action </rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://jet_lee">
+    <rdfs:label>Films action</rdfs:label>
+    <rdfs:label>Films Humour</rdfs:label>
+    <rdfs:label rdf:resource="http://VanDamme"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://VanDamme">
+   <rdfs:label>Films Histoire</rdfs:label>
+     <rdfs:label>Films Humour</rdfs:label>
+     <rdfs:label>Films action</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://bruce_lee">
+    <rdfs:label>Films chinois</rdfs:label>
+    <rdfs:label>Films Histoire</rdfs:label>
+    
+  </rdf:Description>
+  
+  <rdf:Description rdf:about="http://bruce_awa_lee">
+    <rdfs:label>lee chinoissse</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://jacki_chan">
+    <rdfs:label>Films chinois</rdfs:label>
+    
+  </rdf:Description>
+ 
+</rdf:RDF>
