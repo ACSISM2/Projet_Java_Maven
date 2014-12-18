@@ -52,6 +52,9 @@ public class GraphStream {
 		
 		 String styleSheet= "node.resultat {"+"shape: box;"+
 				 "fill-color: #EEEE00;"+
+				   " size: 25px;"+
+				   "}"+"node.resultat2 {"+"shape: box;"+
+				 "fill-color: blue;"+
 				   " size: 40px;"+
 				   "}"+"graph{fill-color:#E0EEEE ;padding: 20px;}";
 		 graph.addAttribute("ui.stylesheet", styleSheet);
@@ -123,6 +126,19 @@ public class GraphStream {
 			
 			current=graph.getNode(r.toString());
 			current.addAttribute("ui.class", "resultat");
+			
+			//current.addAttribute("ui.style", "fill-color: rgb(0,0,0);");
+		}
+		}catch(java.lang.NullPointerException e){System.out.println(e.getMessage()+" erreur ");}
+	}
+public void afficher_Resulta_Noeud(List<String> resultat,String g){
+		
+		Node current;
+		try{
+		for(String r: resultat){
+			
+			current=graph.getNode(r.toString());
+			current.addAttribute("ui.class", "resultat2");
 			
 			//current.addAttribute("ui.style", "fill-color: rgb(0,0,0);");
 		}

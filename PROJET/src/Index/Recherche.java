@@ -17,9 +17,11 @@ import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.search.TopScoreDocCollector;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.util.Version;
+
 import Interface.Interface;
 import Interface.Outils;
 import RDF.Myrdf;
+import SPARQL.MySPARQL;
 
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
@@ -28,11 +30,12 @@ import com.hp.hpl.jena.rdf.model.RDFNode;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.rdf.model.StmtIterator;
+import com.hp.hpl.jena.sparql.vocabulary.FOAF;
 import com.hp.hpl.jena.vocabulary.RDFS;
 import com.hp.hpl.jena.vocabulary.VCARD;
 public class Recherche {
 
-
+	static MySPARQL m = new MySPARQL();
 	Outils tr=new Outils();
 	javax.swing.table.DefaultTableModel mod_bis;
 	 public static Model model;
@@ -83,7 +86,7 @@ public class Recherche {
 				 ArrayList<String> resultat=new ArrayList<String>();
 				 resultat.add(d.get("Sujet"));
 				 resultat.add(d.get("Objet"));
-			
+				 resultat.add(d.get("Predicat"));
 				 resultat3.add(i,resultat);
 				mod_bis = (javax.swing.table.DefaultTableModel) Interface.table.getModel();
 
@@ -116,7 +119,7 @@ public class Recherche {
 					ArrayList<String> resultat=new ArrayList<String>();
 					 resultat.add(d.get("Sujet"));
 					 resultat.add(d.get("Objet"));
-				
+					 resultat.add(d.get("Predicat"));
 					 resultat3.add(i,resultat);
 				//	testeur=d.get("ligne");
 					
@@ -132,27 +135,21 @@ public class Recherche {
 			result.addAll(resultat4);
 			result.addAll(resultat2);
 			for(ArrayList so: resultat3){
-				
-			Resource res = model.createResource(so.get(0).toString());
-			   res.addProperty(RDFS.label,so.get(1).toString());  
-			  // result=new ArrayList<String>(resultat.size()+resultat2.size());
-			  // result.add(so.get(0).toString());
-			}
+
+				Resource res = model.createResource(so.get(0).toString());
+				res.addProperty(RDFS.label,so.get(1).toString());
+				// result=new ArrayList<String>(resultat.size()+resultat2.size());
+				// result.add(so.get(0).toString());
+				}
 			
 			model.write(System.out);
+			//-----------------------------------------------------------------------------------
+			//m.sparqlTest(model);
 			
 			for(String ob : result){
 				
 			}
-			//Triplet T;
-			/*for(String triple: result){
-				// System.out.println("+++++++***************+++++++"+triple.toString());
-				 
-				}
-			/*for(String triple: result){
-			 System.out.println("++++++++++++++"+triple.toString());
-			 
-			}*/
+			
 			reader.close();
 			Interface.label.setText(c + "  Resultats trouvés.");
 		}catch(org.apache.lucene.queryparser.classic.ParseException e){

@@ -49,11 +49,11 @@ public class Interface extends JFrame {
 	Outils traite= new Outils(); 
 	Myrdf lec_rdf= new Myrdf(); 
 	Myindex index=new Myindex();
-	static MySPARQL m = new MySPARQL();
 	Recherche rech = new Recherche();
 	Algo_Dijkstra algo = new Algo_Dijkstra();
 	GraphStream stream;
 	GraphStream stream2;
+	MySPARQL sparql = new MySPARQL();
 	public static JTextField textField;
 	public static JLabel label = new JLabel("");
 	public static JLabel label_1 = new JLabel("");
@@ -81,7 +81,6 @@ public class Interface extends JFrame {
 					model_rdf=lec_rdf.lire_fichier_rdf(filename=traite.ouvrir_fichier());
 				
 					lec_rdf.affichage_rdf_Jtable(model_rdf,table);
-					m.sparqlTest();
 				}catch(Exception E){
 					// java.lang.NullPointerException
 				}
@@ -229,6 +228,7 @@ public class Interface extends JFrame {
 					
 				 stream2.afficher_Resulta_Noeud (rech.result);
 				  algo.plusCourtChemin(rech.result);
+				  stream2.afficher_Resulta_Noeud(sparql.sparqlTest(algo.titrefilm, algo.rolepers),"");
 				/*try {
 					if(!textField.getText().equals(""))
 					{
@@ -292,6 +292,7 @@ public class Interface extends JFrame {
 								 System.out.println("la taille du resultat dans List "+rech.result.size());
 								stream.afficher_Resulta_Noeud (rech.result);
 							 algo.plusCourtChemin(rech.result);
+							 
 							  while(rech.result.size()>0){rech.result.remove(0);}
 							}else traite.actualiser_table(table);
 						} catch (IOException e1) {
