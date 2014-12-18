@@ -1,6 +1,5 @@
 package Interface;
 import java.awt.Font;
-import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -25,10 +24,8 @@ import net.miginfocom.swing.MigLayout;
 
 import org.apache.lucene.queryparser.classic.ParseException;
 import org.graphstream.graph.Graph;
-import org.graphstream.ui.graphicGraph.GraphicGraph;
 import org.graphstream.ui.swingViewer.View;
 import org.graphstream.ui.swingViewer.Viewer;
-import org.graphstream.ui.swingViewer.util.DefaultCamera;
 
 import Graph.GraphStream;
 import Index.Myindex;
@@ -58,9 +55,9 @@ public class Interface extends JFrame {
 	public static JTextField textField;
 	public static JLabel label = new JLabel("");
 	public static JLabel label_1 = new JLabel("");
-    public static String filename="";
-    public Viewer viewer;
-    public View view=null;
+	public static String filename="";
+	public Viewer viewer;
+	public View view=null;
 	@SuppressWarnings("deprecation")
 	public Interface () throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
 
@@ -70,7 +67,7 @@ public class Interface extends JFrame {
 		UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
-		
+
 		JMenu mnFile = new JMenu("File");
 		menuBar.add(mnFile);
 		JMenuItem mntmRDF = new JMenuItem("RDF");
@@ -78,9 +75,9 @@ public class Interface extends JFrame {
 			public void actionPerformed(ActionEvent evt) {
 
 				try{ 
-					
+
 					model_rdf=lec_rdf.lire_fichier_rdf(filename=traite.ouvrir_fichier());
-				
+
 					lec_rdf.affichage_rdf_Jtable(model_rdf,table);
 				}catch(Exception E){
 					// java.lang.NullPointerException
@@ -94,7 +91,7 @@ public class Interface extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				//graph.JGraph(index.model);
 				stream =new GraphStream(model_rdf);
-				 Graph graph = null;
+				Graph graph = null;
 				try {
 					try {
 						graph = stream.construir_Graph();
@@ -106,9 +103,10 @@ public class Interface extends JFrame {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				
-				 Viewer viewer= graph.display();
-				//	viewer.setCloseFramePolicy(Viewer.CloseFramePolicy.HIDE_ONLY);
+
+				@SuppressWarnings("unused")
+				Viewer viewer= graph.display();
+
 			}
 		});
 		mnFile.add(mntmGraph);
@@ -194,6 +192,7 @@ public class Interface extends JFrame {
 
 
 		btnRecherche.addActionListener(new ActionListener() {
+			@SuppressWarnings("static-access")
 			public void actionPerformed(ActionEvent e) {
 				try {
 					try {
@@ -208,7 +207,7 @@ public class Interface extends JFrame {
 				}
 				stream2 =new GraphStream(rech.model);
 				stream2.setModel(rech.model);
-				 Graph graph = null;
+				Graph graph = null;
 				try {
 					try {
 						graph = stream2.construir_Graph();
@@ -220,38 +219,62 @@ public class Interface extends JFrame {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				
-				 Viewer viewer= graph.display();
-				
-					viewer.setCloseFramePolicy(Viewer.CloseFramePolicy.HIDE_ONLY);
-					// DefaultCamera def=new DefaultCamera((GraphicGraph) graph);
-				    //  def.setViewPercent(1000);
-					
-				 stream2.afficher_Resulta_Noeud (rech.result);
-				  algo.plusCourtChemin(rech.result);
-				  ArrayList<String> al=sparql.sparqlTest(algo.titrefilm, algo.rolepers,model_rdf);
-					 stream2.afficher_Resulta_Noeud(al,"");
-				
-					
-				/*try {
+
+				Viewer viewer= graph.display();
+
+				viewer.setCloseFramePolicy(Viewer.CloseFramePolicy.HIDE_ONLY);
+				// DefaultCamera def=new DefaultCamera((GraphicGraph) graph);
+				//  def.setViewPercent(1000);
+
+				stream2.afficher_Resulta_Noeud (rech.result);
+				algo.plusCourtChemin(rech.result);
+				ArrayList<String> al=sparql.sparqlTest(algo.titrefilm, algo.rolepers,model_rdf);
+				stream2.afficher_Resulta_Noeud(al,"");
+
+
+			}
+		});
+
+		btnRecherche.setBounds(552, 86, 89, 28);
+		panel.add(btnRecherche);
+
+
+		JButton btnaffich = new JButton("Afficher le chemin sur le graphe");
+		panel1.add(btnaffich, "cell 0 2");
+
+
+		btnaffich.addActionListener(new ActionListener() {
+			@SuppressWarnings("static-access")
+			public void actionPerformed(ActionEvent e) {
+				try {
 					if(!textField.getText().equals(""))
 					{
 						index.ajout_adddoc(table,model_rdf);
-						stream =new GraphStreamJena(model_rdf);
-						
-						 Graph graph = null;
+						stream =new GraphStream(model_rdf);
+
+						Graph graph = null;
 						try {
-							
-							graph = stream.buildGraph();
-						} catch (IOException | InterruptedException e1) {
+
+							graph = stream.construir_Graph();
+						} catch (IOException  e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (InterruptedException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
-						 graph.display();
-						 System.out.println("la taille du resultat dans List "+rech.result.size());
-					//	stream.viewResultNode(rech.result);
-					//  stream.printShortPath(rech.result);
-					  while(rech.result.size()>0){rech.result.remove(0);}
+
+						Viewer viewer= graph.display();
+						viewer.setCloseFramePolicy(Viewer.CloseFramePolicy.HIDE_ONLY);
+						System.out.println("la taille du resultat dans List "+rech.result.size());
+						stream.afficher_Resulta_Noeud (rech.result);
+						algo.plusCourtChemin(rech.result,"");
+						ArrayList<String> al=sparql.sparqlTest(algo.titrefilm, algo.rolepers,model_rdf);
+						stream.afficher_Resulta_Noeud(al,"");
+
+
+
+						while(rech.result.size()>0){rech.result.remove(0);}
 					}else traite.actualiser_table(table);
 				} catch (IOException e1) {
 
@@ -259,86 +282,12 @@ public class Interface extends JFrame {
 				} catch (ParseException e1) {
 
 					e1.printStackTrace();
-				}*/
-			}
-		});
-
-		btnRecherche.setBounds(552, 86, 89, 28);
-		panel.add(btnRecherche);
-
-		
-		JButton btnaffich = new JButton("Afficher le chemin sur le graphe");
-		panel1.add(btnaffich, "cell 0 2");
-		
-		
-				btnaffich.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						try {
-							if(!textField.getText().equals(""))
-							{
-								index.ajout_adddoc(table,model_rdf);
-								stream =new GraphStream(model_rdf);
-								
-								 Graph graph = null;
-								try {
-									
-									graph = stream.construir_Graph();
-								} catch (IOException  e1) {
-									// TODO Auto-generated catch block
-									e1.printStackTrace();
-								} catch (InterruptedException e1) {
-									// TODO Auto-generated catch block
-									e1.printStackTrace();
-								}
-								
-								 Viewer viewer= graph.display();
-									viewer.setCloseFramePolicy(Viewer.CloseFramePolicy.HIDE_ONLY);
-								 System.out.println("la taille du resultat dans List "+rech.result.size());
-								stream.afficher_Resulta_Noeud (rech.result);
-							 algo.plusCourtChemin(rech.result,"");
-							 ArrayList<String> al=sparql.sparqlTest(algo.titrefilm, algo.rolepers,model_rdf);
-							 stream.afficher_Resulta_Noeud(al,"");
-							
-							 
-								  
-							  while(rech.result.size()>0){rech.result.remove(0);}
-							}else traite.actualiser_table(table);
-						} catch (IOException e1) {
-		
-							e1.printStackTrace();
-						} catch (ParseException e1) {
-		
-							e1.printStackTrace();
-						}
-					}
-				});
-		panel1.add(btnaffich, "flowx,cell 0 3");
-	
-		
-		/*JButton btntest = new JButton("test");
-
-
-		btntest.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				stream2 =new GraphStreamJena(rech.model);
-				stream2.setModel(rech.model);
-				 Graph graph = null;
-				try {
-					graph = stream2.buildGraph();
-				} catch (IOException | InterruptedException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
 				}
-				 graph.display();
-				 
-				 stream2.viewResultNode(rech.result);
-				  stream2.printShortPath(rech.result);
 			}
-			
 		});
+		panel1.add(btnaffich, "flowx,cell 0 3");
 
-		btntest.setBounds(20, 20, 20, 40);
-		panel.add(btntest);*/
+
 
 		label.setBounds(562, 123, 222, 14);
 		panel.add(label);
@@ -348,14 +297,14 @@ public class Interface extends JFrame {
 		label_1.setBounds(60, 61, 190, 14);
 
 		panel.add(label_1);
-		
+
 		JButton btnNewButton = new JButton("Afficher Graph");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
+
 				//graph.JGraph(index.model);
 				stream =new GraphStream(model_rdf);
-				 Graph graph = null;
+				Graph graph = null;
 				try {
 					try {
 						graph = stream.construir_Graph();
@@ -367,18 +316,10 @@ public class Interface extends JFrame {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				
-				    Viewer viewer= graph.display();
-					viewer.setCloseFramePolicy(Viewer.CloseFramePolicy.HIDE_ONLY);
-				// System.out.println("la taille du resultat dans List "+rech.result.size());
-			//	stream.viewResultNode(rech.result);
-			//  stream.printShortPath(rech.result);
-			 
-				/*if(textField.getText()!="")
-				{
-				graph.JGraph(index.model);
-				}
-				//else{ graph.JGraph(model_rdf);}*/
+
+				Viewer viewer= graph.display();
+				viewer.setCloseFramePolicy(Viewer.CloseFramePolicy.HIDE_ONLY);
+
 			}
 		});
 		panel1.add(btnNewButton, "cell 0 2");

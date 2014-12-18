@@ -17,23 +17,13 @@ import com.hp.hpl.jena.util.FileManager;
 
 public class Myrdf {
 	public static List<Resource> l = new ArrayList<Resource>();
-	////////////////////////// ///////// <<<<================================ Pourquoi sa c'est faut ??
-	/////////////////////////////
 	//////////recupèrè un fichier rdf a partir de son path/////////// 
 	/////////////////////////////////////////////////////
-	
-	
 	public Model lire_fichier_rdf (String inputFileName){
 		Model model = ModelFactory.createDefaultModel();
 		Interface.label.setText("");
 		Interface.textField.setText("");
-		// créer un modèle vide
-       
-		//Interface.model_rdf=model;
 		
-		//Outils.vider_Jtable(Interface.table);
-
-		// utiliser le FileManager pour trouver le fichier d'entrée
 		InputStream in = FileManager.get().open( inputFileName );
 		if (in == null) {
 			throw new IllegalArgumentException(
@@ -43,9 +33,6 @@ public class Myrdf {
 
 		return model;
 	}	
-
-
-
 	///////////// affichage du rdf dans la Jtable
 
 	public void affichage_rdf_Jtable (Model model,JTable Table)
@@ -68,13 +55,9 @@ public class Myrdf {
 			javax.swing.table.DefaultTableModel mod = (javax.swing.table.DefaultTableModel) Table.getModel();
 			mod.addRow(new Object[]{subject,predicate,object});
 		}
-		//Resource ss = l.get(0);
+	
 
 
 	}
-
-
-
-
 
 }

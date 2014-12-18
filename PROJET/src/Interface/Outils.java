@@ -10,8 +10,8 @@ import RDF.Myrdf;
 
 public class Outils {
 	Myrdf rdf=new Myrdf();
-	
-	
+
+
 
 	public void vider_Jtable (JTable Table)  // vider la table
 	{   
@@ -28,35 +28,35 @@ public class Outils {
 		Interface.label.setText("");
 		Interface.textField.setText("");
 	}
-	
-	
+
+
 	public class extention extends FileFilter{
-		   private String description;
-		   private String extension;
-		   
-		   // Constructeur à partir de la description et de l'extension acceptée
-		   public extention(String description, String extension){
-		      if(description == null || extension == null){
-		         throw new NullPointerException("La description (ou extension) ne peut être null.");
-		      }
-		      
-		      this.description = description;
-		      this.extension = extension;
-		   }
-		   
-		   // Implémentation de FileFilter
-		   public boolean accept(File file){
-		      if (file.isDirectory()) { 
-		         return true; 
-		      } 
-		      
-		      String nomFichier = file.getName().toLowerCase(); 
-		      	return nomFichier.endsWith(extension);
-		   }
-		      public String getDescription(){
-		      return description;
-		   }
+		private String description;
+		private String extension;
+
+		// Constructeur à partir de la description et de l'extension acceptée
+		public extention(String description, String extension){
+			if(description == null || extension == null){
+				throw new NullPointerException("La description (ou extension) ne peut être null.");
+			}
+
+			this.description = description;
+			this.extension = extension;
 		}
+
+		// Implémentation de FileFilter
+		public boolean accept(File file){
+			if (file.isDirectory()) { 
+				return true; 
+			} 
+
+			String nomFichier = file.getName().toLowerCase(); 
+			return nomFichier.endsWith(extension);
+		}
+		public String getDescription(){
+			return description;
+		}
+	}
 
 
 	@SuppressWarnings("deprecation")
@@ -71,8 +71,8 @@ public class Outils {
 		chooser.addChoosableFileFilter(rdf);
 		chooser.addChoosableFileFilter(xml);
 		chooser.setAcceptAllFileFilterUsed(false);
-		
-		
+
+
 		chooser.showOpenDialog(null);
 
 		File f=chooser.getSelectedFile();
