@@ -16,7 +16,6 @@ import com.hp.hpl.jena.rdf.model.StmtIterator;
 import com.hp.hpl.jena.util.FileManager;
 
 public class Myrdf {
-	public static Model model ;
 	public static List<Resource> l = new ArrayList<Resource>();
 	////////////////////////// ///////// <<<<================================ Pourquoi sa c'est faut ??
 	/////////////////////////////
@@ -25,7 +24,7 @@ public class Myrdf {
 	
 	
 	public Model lire_fichier_rdf (String inputFileName){
-		model = ModelFactory.createDefaultModel();
+		Model model = ModelFactory.createDefaultModel();
 		Interface.label.setText("");
 		Interface.textField.setText("");
 		// créer un modèle vide

@@ -4,6 +4,7 @@ import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -228,7 +229,10 @@ public class Interface extends JFrame {
 					
 				 stream2.afficher_Resulta_Noeud (rech.result);
 				  algo.plusCourtChemin(rech.result);
-				  stream2.afficher_Resulta_Noeud(sparql.sparqlTest(algo.titrefilm, algo.rolepers),"");
+				  ArrayList<String> al=sparql.sparqlTest(algo.titrefilm, algo.rolepers,model_rdf);
+					 stream2.afficher_Resulta_Noeud(al,"");
+				
+					
 				/*try {
 					if(!textField.getText().equals(""))
 					{
@@ -291,8 +295,12 @@ public class Interface extends JFrame {
 									viewer.setCloseFramePolicy(Viewer.CloseFramePolicy.HIDE_ONLY);
 								 System.out.println("la taille du resultat dans List "+rech.result.size());
 								stream.afficher_Resulta_Noeud (rech.result);
-							 algo.plusCourtChemin(rech.result);
+							 algo.plusCourtChemin(rech.result,"");
+							 ArrayList<String> al=sparql.sparqlTest(algo.titrefilm, algo.rolepers,model_rdf);
+							 stream.afficher_Resulta_Noeud(al,"");
+							
 							 
+								  
 							  while(rech.result.size()>0){rech.result.remove(0);}
 							}else traite.actualiser_table(table);
 						} catch (IOException e1) {

@@ -135,12 +135,15 @@ public class Recherche {
 			result.addAll(resultat4);
 			result.addAll(resultat2);
 			for(ArrayList so: resultat3){
-
-				Resource res = model.createResource(so.get(0).toString());
-				res.addProperty(RDFS.label,so.get(1).toString());
-				// result=new ArrayList<String>(resultat.size()+resultat2.size());
-				// result.add(so.get(0).toString());
-				}
+				
+			Resource res = model.createResource(so.get(0).toString());
+			
+			   res.addProperty(RDFS.label,so.get(1).toString());
+			   
+			  // res.addProperty(RDFS.domain,so.get(2).toString());
+			  // result=new ArrayList<String>(resultat.size()+resultat2.size());
+			  // result.add(so.get(0).toString());
+			}
 			
 			model.write(System.out);
 			//-----------------------------------------------------------------------------------

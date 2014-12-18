@@ -55,8 +55,11 @@ public class GraphStream {
 				   " size: 25px;"+
 				   "}"+"node.resultat2 {"+"shape: box;"+
 				 "fill-color: blue;"+
-				   " size: 40px;"+
-				   "}"+"graph{fill-color:#E0EEEE ;padding: 20px;}";
+				   " size: 30px;"+
+				   "}"+"node.resultat3 {"+"shape: box;"+
+					 "fill-color: pink;"+
+					   " size: 40px;"+
+					   "}"+"graph{fill-color:#E0EEEE ;padding: 20px;}";
 		 graph.addAttribute("ui.stylesheet", styleSheet);
 		// list the statements in the graph
         StmtIterator iter = model.listStatements();
@@ -136,7 +139,8 @@ public void afficher_Resulta_Noeud(List<String> resultat,String g){
 		Node current;
 		try{
 		for(String r: resultat){
-			
+			System.out.println(r.toString());
+			System.out.println("Je suis la");
 			current=graph.getNode(r.toString());
 			current.addAttribute("ui.class", "resultat2");
 			
