@@ -11,7 +11,6 @@
    <rdf:Description rdf:about="http://Arnold#">
       <arnold:isA>
          <rdf:Bag rdf:about="http://Vocab#Professions">
-		 <rdf:type rdf:resource="http://Vocab#Job"/>
             <rdf:li>Actor</rdf:li>
             <rdf:li>Producer</rdf:li>
             <rdf:li>Director</rdf:li>
@@ -19,7 +18,6 @@
       </arnold:isA>
    </rdf:Description>
    <rdf:Bag rdf:about="http://movie#Movies">
-            <rdf:type rdf:resource="http://movie#Movie"/>
             <rdf:li rdf:resource="http://movie#filmId_1"/>
             <rdf:li rdf:resource="http://movie#filmId_2"/>
             <rdf:li rdf:resource="http://movie#filmId_3"/>
@@ -34,38 +32,32 @@
       <movie:title>Twins</movie:title>
       <movie:directedBy>Ivan Reitman</movie:directedBy>
       <movie:releaseDate>1988-09-09</movie:releaseDate>
-      <movie:productionCompany>Gold Stallone Films</movie:productionCompany>
+      <movie:productionCompany>Gold Stallone</movie:productionCompany>
    </rdf:Description>
    <rdf:Description rdf:about="http://movie#filmId_3">
       <movie:title>The Expendables 3</movie:title>
       <movie:directedBy>Patrick Ivan</movie:directedBy>
       <movie:releaseDate>2014-08-15</movie:releaseDate>
-      <movie:productionCompany>Nu Image / Millennium Films</movie:productionCompany>
+	  <movie:productionCompany>Paramount Pictures</movie:productionCompany>
    </rdf:Description>
    <rdf:Description rdf:about="http://movie#filmId_1">
-   <rdf:type rdf:resource="http://movie#Movie"/>
       <movie:movieActor>
          <rdf:Bag rdf:about="http://Vocab#actors_1">
-		 <rdf:type rdf:resource="http://Vocab#Person"/>
             <rdf:li>Edward Furlong</rdf:li>
             <rdf:li>Robert Patrick</rdf:li>
          </rdf:Bag>
       </movie:movieActor>
    </rdf:Description>
    <rdf:Description rdf:about="http://movie#filmId_2">
-    <rdf:type rdf:resource="http://movie#Movie"/>
       <movie:movieActor>
          <rdf:Bag rdf:about="http://Vocab#actors_2">
-		 <rdf:type rdf:resource="http://Vocab#Person"/>
             <rdf:li>Abigail Breslin</rdf:li>
          </rdf:Bag>
       </movie:movieActor>
    </rdf:Description>
    <rdf:Description rdf:about="http://movie#filmId_3">
-   <rdf:type rdf:resource="http://movie#Movie"/>
       <movie:movieActor>
          <rdf:Bag rdf:about="http://Vocab#actors_3">
-		 <rdf:type rdf:resource="http://Vocab#Person"/>
             <rdf:li>Sylvester Stallone</rdf:li>
             <rdf:li>Jason Statham</rdf:li>
             <rdf:li>Jet Li</rdf:li>
@@ -73,35 +65,28 @@
       </movie:movieActor>
    </rdf:Description>   
    <rdf:Description rdf:about="http://movie#filmId_1">
-   <rdf:type rdf:resource="http://movie#Movie"/>
       <movie:movieWriter>
          <rdf:Bag rdf:about="http://Vocab#writers_1">
-		 <rdf:type rdf:resource="http://Vocab#Person"/>
             <rdf:li>James Cameron</rdf:li>
             <rdf:li>William Wisher Jr.</rdf:li>
          </rdf:Bag>
       </movie:movieWriter>
    </rdf:Description>
    <rdf:Description rdf:about="http://movie#filmId_2">
-   <rdf:type rdf:resource="http://movie#Movie"/>
       <movie:movieWriter>
          <rdf:Bag rdf:about="http://Vocab#writers_2">
-		 <rdf:type rdf:resource="http://Vocab#Person"/>
             <rdf:li>Ivan Reitman</rdf:li>
          </rdf:Bag>
       </movie:movieWriter>
    </rdf:Description>
    <rdf:Description rdf:about="http://movie#filmId_3">
-   <rdf:type rdf:resource="http://movie#Movie"/>
       <movie:movieWriter>
          <rdf:Bag rdf:about="http://Vocab#writers_3">
-		 <rdf:type rdf:resource="http://Vocab#Person"/>
             <rdf:li>Sylvester Stallone</rdf:li>
             <rdf:li>Creighton Rothenberger</rdf:li>
          </rdf:Bag>
       </movie:movieWriter>
    </rdf:Description>
-   <rdfs:Class rdf:about="http://Vocab#Person"/>
-   <rdfs:Class rdf:about="http://Vocab#Job"/>
+   
    
 </rdf:RDF>
