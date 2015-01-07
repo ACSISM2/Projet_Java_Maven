@@ -1,4 +1,7 @@
 package Interface;
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -41,9 +44,8 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 @SuppressWarnings("serial")
 public class Interface extends JFrame {
-
-	public static  Model model_rdf = ModelFactory.createDefaultModel();
 	public static JTable table = new JTable();
+	public static  Model model_rdf = ModelFactory.createDefaultModel();
 	Outils traite= new Outils(); 
 	Myrdf lec_rdf= new Myrdf(); 
 	Myindex index=new Myindex();
@@ -58,15 +60,20 @@ public class Interface extends JFrame {
 	public static String filename="";
 	public Viewer viewer;
 	public View view=null;
+	JPanel panel_1 = new JPanel();
+	JPanel  panel1 = new JPanel();
 	@SuppressWarnings("deprecation")
 	public Interface () throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 916, 512);
+		
+		setBounds(0, 0, 1365, 730);
 		//Genre application windows sur l'interface
 		UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
 		JMenuBar menuBar = new JMenuBar();
+		panel_1.removeAll();
 		setJMenuBar(menuBar);
+		
 
 		JMenu mnFile = new JMenu("File");
 		menuBar.add(mnFile);
@@ -86,30 +93,7 @@ public class Interface extends JFrame {
 		});
 		mnFile.add(mntmRDF);
 
-		JMenuItem mntmGraph = new JMenuItem("Graph");
-		mntmGraph.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				//graph.JGraph(index.model);
-				stream =new GraphStream(model_rdf);
-				Graph graph = null;
-				try {
-					try {
-						graph = stream.construir_Graph();
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				} catch (IOException  e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
-				@SuppressWarnings("unused")
-				Viewer viewer= graph.display();
-
-			}
-		});
-		mnFile.add(mntmGraph);
+		
 
 		JMenuItem mntmQuitter = new JMenuItem("Quitter");
 		mntmQuitter.addActionListener(new ActionListener() {
@@ -120,7 +104,7 @@ public class Interface extends JFrame {
 		mnFile.add(mntmQuitter);
 		JMenu mnEdit = new JMenu("Edit");
 		menuBar.add(mnEdit);
-		JPanel  panel1 = new JPanel();
+		 
 		panel1.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(panel1);
 		panel1.setLayout(new MigLayout("", "[grow]", "[][grow][]"));
@@ -132,35 +116,6 @@ public class Interface extends JFrame {
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(209, 15, 2, 2);
 		panel.add(scrollPane);
-
-		JScrollPane scrollPane_2 = new JScrollPane();
-		scrollPane_2.setBounds(0, 148, 866, 241);
-		panel.add(scrollPane_2);
-
-
-		table.setModel(new DefaultTableModel(
-				new Object[][] {
-				},
-				new String[] {
-						"Sujet", "Predicat", "Objet"
-				}
-				) {
-			@SuppressWarnings("rawtypes")
-			Class[] columnTypes = new Class[] {
-				String.class, Object.class, String.class, String.class
-			};
-			@SuppressWarnings({ "rawtypes", "unchecked" })
-			public Class getColumnClass(int columnIndex) {
-				return columnTypes[columnIndex];
-			}
-			boolean[] columnEditables = new boolean[] {
-					false, false, false
-			};
-			public boolean isCellEditable(int row, int column) {
-				return columnEditables[column];
-			}
-		});
-		scrollPane_2.setViewportView(table);	
 
 		textField = new JTextField();
 		textField.addKeyListener(new KeyAdapter() {
@@ -184,7 +139,7 @@ public class Interface extends JFrame {
 
 			}
 		});
-		textField.setBounds(39, 86, 482, 28);
+		textField.setBounds(278, 86, 482, 28);
 		panel.add(textField);
 		textField.setColumns(10);
 		textField.disable();
@@ -211,6 +166,7 @@ public class Interface extends JFrame {
 				try {
 					try {
 						graph = stream2.construir_Graph();
+						
 					} catch (InterruptedException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -219,23 +175,31 @@ public class Interface extends JFrame {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-
-				Viewer viewer= graph.display();
-
+				if(viewer!=null){
+				viewer.close();
+				}
+			    //panel1.add(graph);
+				Viewer viewer = new Viewer(graph, Viewer.ThreadingModel.GRAPH_IN_ANOTHER_THREAD);
+				 //viewer= graph.display();
+				 viewer.enableAutoLayout();
 				viewer.setCloseFramePolicy(Viewer.CloseFramePolicy.HIDE_ONLY);
-				// DefaultCamera def=new DefaultCamera((GraphicGraph) graph);
-				//  def.setViewPercent(1000);
-
+				View view = viewer.addDefaultView(false);
+				view.setPreferredSize(new Dimension(panel_1.getWidth(),panel_1.getHeight()));
+				panel_1.removeAll();
+				panel_1.add(view);
+				
+				panel_1.validate();
 				stream2.afficher_Resulta_Noeud (rech.result);
 				algo.plusCourtChemin(rech.result);
 				ArrayList<String> al=sparql.sparqlTest(algo.titrefilm, algo.rolepers,model_rdf);
 				stream2.afficher_Resulta_Noeud(al,"");
+			
 
 
 			}
 		});
 
-		btnRecherche.setBounds(552, 86, 89, 28);
+		btnRecherche.setBounds(770, 86, 89, 28);
 		panel.add(btnRecherche);
 
 
@@ -263,8 +227,10 @@ public class Interface extends JFrame {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
-
-						Viewer viewer= graph.display();
+						if(viewer!=null){
+							viewer.close();
+							}
+						viewer= graph.display();
 						viewer.setCloseFramePolicy(Viewer.CloseFramePolicy.HIDE_ONLY);
 						System.out.println("la taille du resultat dans List "+rech.result.size());
 						stream.afficher_Resulta_Noeud (rech.result);
@@ -289,14 +255,18 @@ public class Interface extends JFrame {
 
 
 
-		label.setBounds(562, 123, 222, 14);
+		label.setBounds(869, 96, 222, 14);
 		panel.add(label);
 		label_1.setFont(new Font("Arial", Font.ITALIC, 10));
 
 
-		label_1.setBounds(60, 61, 190, 14);
+		label_1.setBounds(280, 61, 190, 14);
 
 		panel.add(label_1);
+		
+		
+		panel_1.setBounds(10, 123, 1305, 429);
+		panel.add(panel_1);
 
 		JButton btnNewButton = new JButton("Afficher Graph");
 		btnNewButton.addActionListener(new ActionListener() {
@@ -316,8 +286,10 @@ public class Interface extends JFrame {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-
-				Viewer viewer= graph.display();
+				if(viewer!=null){
+					viewer.close();
+					}
+				viewer= graph.display();
 				viewer.setCloseFramePolicy(Viewer.CloseFramePolicy.HIDE_ONLY);
 
 			}

@@ -52,7 +52,7 @@ public class GraphStream {
 				"}"+"node.resultat3 {"+"shape: box;"+
 				"fill-color: pink;"+
 				" size: 40px;"+
-				"}"+"graph{fill-color:#E0EEEE ;padding: 20px;}";
+				"}"+"graph{fill-color:#f0f0f0 ;padding: 20px;}";
 		graph.addAttribute("ui.stylesheet", styleSheet);
 		// list the statements in the graph
 		StmtIterator iter = model.listStatements();
