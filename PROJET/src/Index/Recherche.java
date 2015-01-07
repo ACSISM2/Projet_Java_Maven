@@ -119,7 +119,12 @@ public class Recherche {
 
 				Resource res = model.createResource(so.get(0).toString());
 
-		
+				//p="zz";
+				String tex=so.get(2).toString();
+				tex=tex.substring(tex.lastIndexOf("#")+1);
+				int cont=0;
+				
+				if(cont==0)
 					res.addProperty(RDFS.label,so.get(1).toString());
 
 			}

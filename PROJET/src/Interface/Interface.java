@@ -175,9 +175,9 @@ public class Interface extends JFrame {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				if(viewer!=null){
+				/*if(viewer!=null){
 				viewer.close();
-				}
+				}*/
 			    //panel1.add(graph);
 				Viewer viewer = new Viewer(graph, Viewer.ThreadingModel.GRAPH_IN_ANOTHER_THREAD);
 				 //viewer= graph.display();
@@ -191,9 +191,10 @@ public class Interface extends JFrame {
 				panel_1.validate();
 				stream2.afficher_Resulta_Noeud (rech.result);
 				algo.plusCourtChemin(rech.result);
+				if (textField.getText().contains(" ")){
 				ArrayList<String> al=sparql.sparqlTest(algo.titrefilm, algo.rolepers,model_rdf);
 				stream2.afficher_Resulta_Noeud(al,"");
-			
+				}
 
 
 			}
@@ -286,9 +287,9 @@ public class Interface extends JFrame {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				if(viewer!=null){
+				/*if(viewer!=null){
 					viewer.close();
-					}
+					}*/
 				viewer= graph.display();
 				viewer.setCloseFramePolicy(Viewer.CloseFramePolicy.HIDE_ONLY);
 
